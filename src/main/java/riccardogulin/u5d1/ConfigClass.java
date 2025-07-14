@@ -3,6 +3,7 @@ package riccardogulin.u5d1;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import riccardogulin.u5d1.entities.*;
 
 @Configuration // Annotazione OBBLIGATORIA se vogliamo che questa classe venga presa in considerazione all'avvio dell'applicazione
@@ -30,6 +31,10 @@ public class ConfigClass {
 
 	@Bean(name = "aldo") // Opzionalmente posso specificare il nome personalizzato per il Bean. Se non lo faccio
 	// verrà utilizzato il nome del metodo come riferimento (getFSStudent)
+	@Scope("prototype") // Annotazione OPZIONALE. Mi serve quando non voglio che lo Scope sia SINGLETON
+	// SINGLETON = c'è un'unica copia dell'oggetto IN TUTTA L'APPLICAZIONE. Questo è il comportamento di default dei Beans (ed è estremamente utile)
+	// PROTOTYPE = ogni volta che uso .getBean mi verrà restituito un NUOVO OGGETTO scollegato dal precedente
+	// Esistono ulteriori valori per lo @Scope però essi hanno un senso solo nel contesto di applicazioni Web
 	public FullstackStudent getFSStudent() {
 		return new FullstackStudent("Aldo", "Baglio");
 	}
